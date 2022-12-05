@@ -1,27 +1,9 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
+import Users from './Users';
 
 const BASE_URL = 'https://www.acme-api.com/api';
 
-const Users = ({ users })=> {
-  return (
-      <ul>
-        {
-          users.map( user => {
-            return (
-              <li key={ user.id }>
-                { user.fullName }
-                ( { user.email })
-                <br />
-                { user.title }
-                
-              </li>
-            );
-          })
-        }
-      </ul>
-  );
-};
 
 const App = ()=> {
   const [term, setTerm] = React.useState('');
