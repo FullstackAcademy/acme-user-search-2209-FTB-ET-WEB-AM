@@ -5,6 +5,7 @@ const Users = ({ users })=> {
       <ul>
         {
           users.map( user => {
+            console.log(user);
             return (
               <li key={ user.id }>
                 { user.fullName }

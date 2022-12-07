@@ -1,29 +1,18 @@
 import ReactDOM from 'react-dom';
-import React from 'react';
+import React, { useState } from 'react';
 import Users from './Users';
-
-const BASE_URL = 'https://www.acme-api.com/api';
-
+import Search from './Search';
+import Loader from './Loader';
 
 const App = ()=> {
-  const [term, setTerm] = React.useState('');
-  const [users, setUsers] = React.useState([]);
-  const search = async(ev)=> {
-    ev.preventDefault();
-    const url = `${BASE_URL}/users/search/${term}`;
-    const response = await fetch(url);
-    const json = await response.json();
-    const { users } = json;
-    setUsers(users)
-  }
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <div>
       <h1>Acme User Search</h1>
-      <form onSubmit={ search }>
-        <input value={ term } onChange={ ev => setTerm(ev.target.value)}/>
-        <button disabled={ !term }>Search</button>
-      </form>
+      <Search setUsers={ setUsers } setIsLoading={ setIsLoading }/>
       <Users users={ users }/>
+      { isLoading ? <Loader /> : null }
     </div>
   );
 };
